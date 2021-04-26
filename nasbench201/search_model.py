@@ -46,7 +46,8 @@ class TinyNetwork(nn.Module):
     self.global_pooling = nn.AdaptiveAvgPool2d(1)
     self.classifier = nn.Linear(C_prev, num_classes)
     # self._arch_parameters = nn.Parameter( 1e-3*torch.randn(num_edge, len(search_space)) )
-    self._arch_parameters = Variable(1e-3*torch.randn(num_edge, len(search_space)).cuda(), requires_grad=True)
+    # self._arch_parameters = Variable(1e-3*torch.randn(num_edge, len(search_space)).cuda(), requires_grad=True)
+    self._arch_parameters = Variable(1.0/self.num_op*torch.ones(num_edge, len(search_space)).cuda(), requires_grad=True)
 
     ## optimizer
     arch_params = set(id(m) for m in self.arch_parameters())
